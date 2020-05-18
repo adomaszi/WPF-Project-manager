@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
 using WpfPractice.Model;
 
 namespace WpfPractice.ModelView
@@ -19,6 +21,8 @@ namespace WpfPractice.ModelView
             _silo = list;
         }
 
+  
+
         public SiloViewModel(string name)
         {
             _silo = new Silo(name);
@@ -30,6 +34,7 @@ namespace WpfPractice.ModelView
             OnPropertyChanged();
         }
 
+       
         public void RemoveTask(Task task)
         {
             Tasks.Remove(task);
@@ -42,4 +47,5 @@ namespace WpfPractice.ModelView
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+    
 }

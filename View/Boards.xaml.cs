@@ -32,13 +32,21 @@ namespace WpfPractice.View
         {
 
         }
-
+        // In MainPage.xaml.cs 
+        private void RefreshClick(object sender, EventArgs e)
+        {
+            //var vm = (MainViewModel)DataContext;
+           // vm.RefreshCommand.Execute(null);
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var SelectedTaskEditor = (StackPanel)LayoutRoot.FindName("SelectedTask");
             var button = (Button)sender;
             SelectedTaskEditor.DataContext = button.DataContext;
             Debug.Write("Doing it");
+            // another way would be to store the ViewModel in this object.
+            // Pass the view model the required data and execute commands
+            // But is that correct MVVM?
         }
     }
 }

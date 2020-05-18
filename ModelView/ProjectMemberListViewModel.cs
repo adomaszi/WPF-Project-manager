@@ -21,20 +21,9 @@ namespace WpfPractice.ModelView
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         List<List<int>> data = new List<List<int>>();
-       
-       
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(
-                    () =>
-                    {
-                        projectMembers.Remove(SelectedItem);
-                        OnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, SelectedItem));
-                    });
-            }
-        }
+
+
+     
 
         public ProjectMemberViewModel SelectedItem { 
             get => _selectedItem; 

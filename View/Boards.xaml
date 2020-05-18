@@ -16,6 +16,9 @@
     </Page.DataContext>
     <StackPanel Orientation="Horizontal"
                 Name="LayoutRoot">
+        <Button Command="{Binding dummy}"
+                Click="Button_Click"
+                Content="Edit"></Button>
         <ScrollViewer Foreground="Gainsboro"
                       Background="#FF4BBF6B">
             <StackPanel Orientation="Horizontal">
@@ -40,7 +43,7 @@
                                                Margin="10,10,0,10"
                                                Foreground="Black" />
                                     <ListBox ItemsSource="{Binding Tasks}"
-                                             SelectedItem="{Binding SelectedTask}"
+                                             SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
                                              Name="ListBox1"
                                              Height="400"
                                              Margin="4,4,0,0"
@@ -53,14 +56,17 @@
                                                     <TextBox Text="{Binding Name}"
                                                              Margin="0,0,5,0" /> 
                                                     <TextBox Text="{Binding Decription}" />
-                                                    <Button Command="{Binding Task_SelectionChanged}"
-                                                            CommandParameter="{Binding SelectedTask}"
+                                                    <Button Command="{Binding }"
                                                             Click="Button_Click"
                                                             Content="Edit"></Button>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
+                                    <Button Content="Add another card"
+                                            DataContext="{Binding XPath}"
+                                            Command="{Binding AddPhoneCommand}"
+                                            CommandParameter="{Binding Name}"></Button>
                                 </StackPanel>   
                             </Border>
                         </DataTemplate>
@@ -74,7 +80,8 @@
                     <!-- Name="SelectedTask" Used for 
                     attaching the torrect task to the 
                     DataContext of -->
-                    <StackPanel Name="SelectedTask" Orientation="Vertical"
+                    <StackPanel Name="SelectedTask"
+                                DataContext="{Binding SelectedTask}" Orientation="Vertical"
                                 Width="272">
                         <TextBlock Text="Task Name: "></TextBlock>
                         <TextBox Text="{Binding Name}"></TextBox>
