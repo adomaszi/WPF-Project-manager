@@ -10,9 +10,9 @@ namespace WpfPractice.ModelView
 {
     public class BoardViewModel : INotifyPropertyChanged
     {
-        Board _board;
+        Project _board;
 
-        public BoardViewModel(Board board)
+        public BoardViewModel(Project board)
         {
             _board = board;
         }
@@ -27,10 +27,10 @@ namespace WpfPractice.ModelView
         }
         public string Decription
         {
-            get => _board.Decription;
+            get => _board.Description;
             set
             {
-                _board.Decription = value;
+                _board.Description = value;
                 OnPropertyChanged();
             }
         }

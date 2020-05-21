@@ -12,7 +12,7 @@ namespace WpfPractice.ModelView
     {
         private Task _task;
         public string Name { get => _task.Name; set => _task.Name = value; }
-        public bool Complete { get => _task.Complete; set => _task.Complete = value; }
+        public string Description { get => _task.Description; set => _task.Description = value; }
         internal ObservableCollection<Todo> Todos { get => _task.Todos; set => _task.Todos = value; }
 
         public TaskViewModel(string name)

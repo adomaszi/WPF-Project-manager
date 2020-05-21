@@ -8,7 +8,15 @@
         xmlns:local="clr-namespace:WpfPractice.ModelView">
     
     <Grid>
-        <Frame Source="./Boards.xaml"
-               Grid.ColumnSpan="4" />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Project Overiew" Click="OpenProjectOverview"/>
+            <Button Content="Employee Overiew" />
+        </StackPanel>
+        <TabControl Name="tcSample">
+            <TabItem Header="Project Overiew" x:Name="ProjectOverviewTabItem">
+                <Label Content="Content goes here..." />
+            </TabItem>
+            <TabItem Header="Employee Overiew" />
+        </TabControl>
     </Grid>
 </Window>

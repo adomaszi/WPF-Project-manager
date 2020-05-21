@@ -37,13 +37,13 @@ namespace WpfPractice.ModelView
             silo.AddTask(new Task("Establish a relationship."));
 
             // Board is a project
-            BoardViewModel board1 = new BoardViewModel(new Board("Board1", "Description of Board1"));
+            BoardViewModel board1 = new BoardViewModel(new Project("Board1", "Description of Board1"));
 
             // Adding two Silos to Board1
             board1.Silos = new ObservableCollection<Silo>() { { silo }, { new Silo("Things To Do") } };
             // Add the board to the list
             _boards.Add(board1);
-            BoardViewModel board2 = new BoardViewModel(new Board("Board2", "Description of Board2"));
+            BoardViewModel board2 = new BoardViewModel(new Project("Board2", "Description of Board2"));
             
             _boards.Add(board2);
             // Make sure the changes are reflected

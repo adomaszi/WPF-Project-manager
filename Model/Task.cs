@@ -6,7 +6,7 @@ namespace WpfPractice.Model
     public class Task
     {
         private string _name;
-        private bool _complete;
+        private string _description;
         private ObservableCollection<Todo> _todos = new ObservableCollection<Todo>();
         public Task(string name)
         {
@@ -17,7 +17,7 @@ namespace WpfPractice.Model
         }
 
         public string Name { get => _name; set => _name = value; }
-        public bool Complete { get => _complete; set => _complete = value; }
         internal ObservableCollection<Todo> Todos { get => _todos; set => _todos = value; }
+        public string Description { get => _description; set => _description = value; }
     }
 } 

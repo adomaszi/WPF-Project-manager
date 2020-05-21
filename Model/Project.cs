@@ -5,23 +5,23 @@ using WpfPractice.ModelView;
 
 namespace WpfPractice.Model
 {
-    public class Board
+    public class Project
     {
         private string _name;
-        private string _decription;
+        private string _description;
         private List<Task> _tasks = new List<Task>();
         private List<Person> _members = new List<Person>();
         private ObservableCollection<Silo> _silos = new ObservableCollection<Silo>();
 
-        public Board(string name, string decription)
+        public Project(string name, string description)
         {
-            Name = name;
-            Decription = decription;
+            _name = name;
+            _description = description;
         }
 
         public ObservableCollection<Silo> Silos { get => _silos; set => _silos = value; }
         public string Name { get => _name; set => _name = value; }
-        public string Decription { get => _decription; set => _decription = value; }
+        public string Description { get => _description; set => _description = value; }
 
         public void AddList(Silo list)
         {

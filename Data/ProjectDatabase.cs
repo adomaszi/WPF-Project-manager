@@ -7,6 +7,14 @@ namespace WpfPractice.Data
 {
     public static class ProjectDatabase
     {
+        static public ObservableCollection<Project> GetProjects()
+        {
+            ObservableCollection<Project> projects = new ObservableCollection<Project>();
+            projects.Add(new Project("Dragon Project", "In this project we inspect dinosaur bones."));
+            projects.Add(new Project("Bird Project", "In this project we inspect Bird bones."));
+            projects.Add(new Project("Thesis Project", "In this project we take the data from bird and dinosaur bones and test the hypothesis."));
+            return projects;
+        }
         static ObservableCollection<ProjectMemberViewModel> _members = new ObservableCollection<ProjectMemberViewModel>();
         static public ObservableCollection<ProjectMemberViewModel> GetProjectMembers()
         {
@@ -19,7 +27,7 @@ namespace WpfPractice.Data
             
             return _members;
         }
-        static ObservableCollection<Board> _boards = new ObservableCollection<Board>();
+        static ObservableCollection<Project> _boards = new ObservableCollection<Project>();
         static public ObservableCollection<ProjectMemberViewModel> k()
         {
             
