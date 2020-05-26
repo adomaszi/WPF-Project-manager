@@ -34,12 +34,12 @@ namespace WpfPractice.ModelView
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<Silo> Silos
+        public ObservableCollection<Bucket> Silos
         {
-            get => _board.Silos;
+            get => _board.Buckets;
             set
             {
-                _board.Silos = value;
+                _board.Buckets = value;
                 OnPropertyChanged("Lists");
             }
         }

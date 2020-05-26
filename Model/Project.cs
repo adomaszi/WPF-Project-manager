@@ -11,7 +11,7 @@ namespace WpfPractice.Model
         private string _description;
         private List<Task> _tasks = new List<Task>();
         private List<Person> _members = new List<Person>();
-        private ObservableCollection<Silo> _silos = new ObservableCollection<Silo>();
+        private ObservableCollection<Bucket> _buckets = new ObservableCollection<Bucket>();
 
         public Project(string name, string description)
         {
@@ -19,13 +19,13 @@ namespace WpfPractice.Model
             _description = description;
         }
 
-        public ObservableCollection<Silo> Silos { get => _silos; set => _silos = value; }
+        public ObservableCollection<Bucket> Buckets { get => _buckets; set => _buckets = value; }
         public string Name { get => _name; set => _name = value; }
         public string Description { get => _description; set => _description = value; }
 
-        public void AddList(Silo list)
+        public void AddList(Bucket list)
         {
-            _silos.Add(list);
+            _buckets.Add(list);
         }
 
         public void AddProjectMember(Person newMember)

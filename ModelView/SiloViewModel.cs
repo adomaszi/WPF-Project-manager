@@ -12,11 +12,11 @@ namespace WpfPractice.ModelView
 {
     class SiloViewModel: INotifyPropertyChanged
     {
-        private Silo _silo;
+        private Bucket _silo;
         public string Name { get => _silo.Name; set => _silo.Name = value; }
         public ObservableCollection<Task> Tasks { get => _silo.Tasks; set => _silo.Tasks = value; }
         
-        public SiloViewModel(Silo list)
+        public SiloViewModel(Bucket list)
         {
             _silo = list;
         }
@@ -25,7 +25,7 @@ namespace WpfPractice.ModelView
 
         public SiloViewModel(string name)
         {
-            _silo = new Silo(name);
+            _silo = new Bucket(name);
         }
 
         public void AddTask(Task task)

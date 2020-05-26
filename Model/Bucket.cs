@@ -7,13 +7,13 @@ using System.Text;
 
 namespace WpfPractice.Model
 {
-    public class Silo
+    public class Bucket
     {
         string _name;
         public ObservableCollection<Task> Tasks { get; set; } = new ObservableCollection<Task>();
         public string Name { get => _name; set => _name = value; }
 
-        public Silo(string name)
+        public Bucket(string name)
         {
             Name = name;
         }

@@ -31,7 +31,7 @@ namespace WpfPractice.ModelView
         public BoardsViewModel()
         {
             // Silo is a list of Tasks
-            Silo silo = new Silo("Sprint Backlog");
+            Bucket silo = new Bucket("Sprint Backlog");
             silo.AddTask(new Task("Create a structure."));
             silo.AddTask(new Task("Establish a relationship."));
             silo.AddTask(new Task("Establish a relationship."));
@@ -40,7 +40,7 @@ namespace WpfPractice.ModelView
             BoardViewModel board1 = new BoardViewModel(new Project("Board1", "Description of Board1"));
 
             // Adding two Silos to Board1
-            board1.Silos = new ObservableCollection<Silo>() { { silo }, { new Silo("Things To Do") } };
+            board1.Silos = new ObservableCollection<Bucket>() { { silo }, { new Bucket("Things To Do") } };
             // Add the board to the list
             _boards.Add(board1);
             BoardViewModel board2 = new BoardViewModel(new Project("Board2", "Description of Board2"));

@@ -10,7 +10,11 @@ namespace WpfPractice.Data
         static public ObservableCollection<Project> GetProjects()
         {
             ObservableCollection<Project> projects = new ObservableCollection<Project>();
-            projects.Add(new Project("Dragon Project", "In this project we inspect dinosaur bones."));
+            Project p = new Project("Dragon Project", "In this project we inspect dinosaur bones.");
+            Bucket b = new Bucket("Demo Bucket");
+            b.AddTask(new Task());
+            p.AddList(b);
+            projects.Add(p);
             projects.Add(new Project("Bird Project", "In this project we inspect Bird bones."));
             projects.Add(new Project("Thesis Project", "In this project we take the data from bird and dinosaur bones and test the hypothesis."));
             return projects;

@@ -6,7 +6,59 @@
         xmlns:local="clr-namespace:WpfPractice.View"
         mc:Ignorable="d"
         Title="ProjectView" Height="450" Width="800">
-    <Grid>
-        <TextBox Text="{Binding Project.Name}"></TextBox>
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Project name: "></Label>
+            <TextBox Text="{Binding Project.Name}"></TextBox>
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding Buckets}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="4,0,4,0"
+                            Background="#FFEBECF0"
+                            CornerRadius="7"
+                            VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical"
+                                    Width="272">
+                            <TextBlock Text="{Binding Bucket.Name}"
+                                       FontSize="16"
+                                       Margin="10,10,0,10"
+                                       Foreground="Black" />
+                            <Button Content="Add task"
+                                    Command="{Binding AddTaskCommand}"
+                                    />
+                            <Button Content="Delete selected task"
+                                    Command="{Binding DeleteTaskCommand}"
+                                    CommandParameter="{Binding .}" />
+                            <ListBox ItemsSource="{Binding Bucket.Tasks}"
+                                     SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
+                                     Name="ListBox1"
+                                     Height="400"
+                                     Margin="4,4,0,0"
+                                     Width="250">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Stretch">
+                                            <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
+                                            <TextBox Text="{Binding Name}"
+                                                     Margin="0,0,5,0" />
+                                            <TextBox Text="{Binding Decription}" />
+                                            <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenTaskViewCommand}"
+                                                    CommandParameter="{Binding .}">Expand</Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
 </Window>
