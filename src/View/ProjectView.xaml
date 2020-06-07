@@ -10,6 +10,7 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="Project name: "></Label>
             <TextBox Text="{Binding Project.Name}"></TextBox>
+            <TextBox Text="{Binding Project.Description}"></TextBox>
             <Button Command="{Binding AddBucketCommand}"
                     >Add List</Button>
         </StackPanel>

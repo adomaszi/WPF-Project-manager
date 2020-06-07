@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,23 +11,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfPractice.src.ViewModel;
 using WpfPractice.src.Model;
-using System.Collections.ObjectModel;
+using WpfPractice.src.ViewModel;
 
 namespace WpfPractice.src.View
 {
     /// <summary>
-    /// Interaction logic for ProjectOverviewView.xaml
+    /// Interaction logic for EmployeeOverviewView.xaml
     /// </summary>
-    public partial class ProjectOverviewView : UserControl
+    public partial class EmployeeOverviewView : UserControl
     {
-        private ProjectOverviewViewModel _viewModel;
-        public ProjectOverviewView()
+        EmployeeOverviewViewModel _viewmodel;
+        public EmployeeOverviewView()
         {
-            _viewModel = new ProjectOverviewViewModel();
-            this.DataContext = _viewModel;
+            _viewmodel = new EmployeeOverviewViewModel();
             InitializeComponent();
+            this.DataContext = _viewmodel;
         }
     }
 }

@@ -7,24 +7,23 @@ using WpfPractice.src.Model;
 
 namespace WpfPractice.src.Storage
 {
-    public class StorageClass
+    public static class StorageClass
     {
-        ObservableCollection<Employee> _employees;
-        ObservableCollection<Project> _projects;
+        static ObservableCollection<Employee> _employees;
+        static ObservableCollection<Project> _projects;
 
-        public StorageClass()
-        {
-            SetUpStorage();
-        }
-
-        private void SetUpStorage()
+        public static void SetUpStorage()
         {
             // Create mock data for testing 
-            _projects = new ObservableCollection<Project>(CreateProjects());
             _employees = new ObservableCollection<Employee>(CreateEmployees());
+            _projects = new ObservableCollection<Project>(CreateProjects());
+            Task task = _projects[0].Buckets[0].Tasks[0];
+            Employee employee = _employees[0];
+            task.Employee = employee;
+            employee.Tasks.Add(task);
         }
 
-        private List<Project> CreateProjects()
+        private static List<Project> CreateProjects()
         {
             List<Project> projects = new List<Project>();
 
@@ -52,7 +51,7 @@ namespace WpfPractice.src.Storage
             return projects;
         }
 
-        private List<Employee> CreateEmployees()
+        private static List<Employee> CreateEmployees()
         {
             List<Employee> employees = new List<Employee>();
 
@@ -67,7 +66,7 @@ namespace WpfPractice.src.Storage
             return employees;
         }
 
-        private List<Bucket> CreateBuckets()
+        private static List<Bucket> CreateBuckets()
         {
             List<Bucket> buckets = new List<Bucket>();
 
@@ -93,7 +92,7 @@ namespace WpfPractice.src.Storage
             return buckets;
         }
 
-        private List<Task> CreateTasks() 
+        private static List<Task> CreateTasks() 
         {
             List<Task> tasks = new List<Task>();
             Task makeBread = new Task();
@@ -114,7 +113,7 @@ namespace WpfPractice.src.Storage
 
             Task makeBread_2 = new Task();
             makeBread_2.Name = "Make Bread";
-            makeBread_2.Description = "Bread is tasty. Make it good friend.";
+            makeBread_2.Description = "Bread is tasty. Make it good friend.2";
 
             Subtask subtask_2 = new Subtask("Buy ingredients", false);
             Subtask subtask2_2 = new Subtask("Mix dry ingredients", false);
@@ -152,7 +151,7 @@ namespace WpfPractice.src.Storage
         }
      
 
-        public ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
-        public ObservableCollection<Project> Projects { get => _projects; set => _projects = value; }
+        public static ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
+        public static ObservableCollection<Project> Projects { get => _projects; set => _projects = value; }
     }
 }

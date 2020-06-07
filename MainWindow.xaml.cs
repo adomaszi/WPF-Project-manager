@@ -20,15 +20,17 @@ namespace WpfPractice.src.View
     {
        // ProjectOverviewView _projectOverview;
        // EmployeeOverviewView _employeeOverviewView;
-        StorageClass _storage;
         ProjectOverviewView _projectOverviewView;
+        EmployeeOverviewView _employeeOverviewView;
+
         public WindowMain()
         {
-
-            _storage = new StorageClass();
-            _projectOverviewView = new ProjectOverviewView(_storage.Projects);
+            StorageClass.SetUpStorage();
+            _projectOverviewView = new ProjectOverviewView();
+            _employeeOverviewView = new EmployeeOverviewView();
             InitializeComponent();
             ProjectOverviewTabItem.Content = _projectOverviewView;
+            EmplyeeOverviewTabItem.Content = _employeeOverviewView;
         }
 
         private void OpenProjectOverview(object sender, RoutedEventArgs e)

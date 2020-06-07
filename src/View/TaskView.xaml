@@ -9,6 +9,17 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical">
+                <ComboBox ItemsSource="{Binding Employees}"
+                         SelectedItem="{Binding SelectedEmployee, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding .Name}">
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <TextBox Text="{Binding Name}"></TextBox>
                 <TextBox Text="{Binding Description}"></TextBox>
                 <DatePicker SelectedDate="{Binding DueDate}" />

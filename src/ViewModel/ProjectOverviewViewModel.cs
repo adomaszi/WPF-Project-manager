@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using WpfPractice.src.Model;
+using WpfPractice.src.Storage;
 using WpfPractice.src.View;
 
 namespace WpfPractice.src.ViewModel
@@ -15,9 +16,9 @@ namespace WpfPractice.src.ViewModel
         private ObservableCollection<Project> _projects;
         public ObservableCollection<Project> Projects { get => _projects; set => _projects = value; }
 
-        public ProjectOverviewViewModel(ObservableCollection<Project> projects)
+        public ProjectOverviewViewModel()
         {
-            _projects = projects;
+            _projects = StorageClass.Projects;
             // Add CustomEventHandler
             _addProjectCommand.EventHandler += AddNewProjectEventHandler;
             _deleteProjectCommand.EventHandler += DeleteProjectEventHandler;

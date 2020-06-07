@@ -6,16 +6,20 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using WpfPractice.src.Model;
+using WpfPractice.src.Storage;
 
 namespace WpfPractice.src.ViewModel
 {
     public class TaskViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
         private Task _task;
+        private Employee _selectedEmployee;
+        private ObservableCollection<Employee> _employees;
         ObservableCollection<Subtask> _subtasks;
 
         public TaskViewModel(Task task)
         {
+            Employees = StorageClass.Employees;
             _task = task;
             _subtasks = _task.SubtaskList;
             
@@ -118,6 +122,20 @@ namespace WpfPractice.src.ViewModel
         {
             get { return _deleteTaskCommand; }
         }
+
+        public ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
+        public Employee SelectedEmployee { get => _task.Employee; set {
+                Employee e = _task.Employee;
+                if (e != null)
+                {
+                    e.Tasks.Remove(_task);
+                }
+                _selectedEmployee = value; 
+                _task.Employee = value;
+                _task.Employee.Tasks.Add(_task);
+
+                OnPropertyChanged(); 
+            } }
 
         public void DeleteSubtaskEventHandler(object parameter)
         {
