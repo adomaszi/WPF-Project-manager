@@ -14,17 +14,15 @@ namespace WpfPractice.src.ViewModel
     {
         private Bucket _bucket;
         public Bucket Bucket { get => _bucket; set => _bucket = value; }
-        private TaskViewModel _selectedTask;
-        public TaskViewModel SelectedTask { get => _selectedTask; set { _selectedTask = value; OnPropertyChanged("SelectedTask"); } }
-        private ObservableCollection<TaskViewModel> _taskViewModels = new ObservableCollection<TaskViewModel>();
-        public ObservableCollection<TaskViewModel> TaskViewModels { get => _taskViewModels; set { _taskViewModels = value;} }
+        private Task _selectedTask;
+        public Task SelectedTask { get => _selectedTask; set { _selectedTask = value; OnPropertyChanged("SelectedTask"); } }
+        private ObservableCollection<Task> _tasks;
+        public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value;} }
         public BucketViewModel(Bucket bucket)
         {
             _bucket = bucket;
-            _bucket.Tasks.ForEach(delegate(Task task) {
-                TaskViewModels.Add(new TaskViewModel(task));
-            });
-            TaskViewModels.CollectionChanged += this.OnCollectionChanged;
+            _tasks = bucket.Tasks;
+            Tasks.CollectionChanged += this.OnCollectionChanged;
 
             AddTaskCommand.EventHandler += AddTaskEventHandler;
             DeleteTaskCommand.EventHandler += DeleteTaskEventHandler;
@@ -57,7 +55,7 @@ namespace WpfPractice.src.ViewModel
         }
         public void AddTaskEventHandler(object parameter)
         {
-            TaskViewModels.Add(new TaskViewModel());
+            Tasks.Add(new Task());
         }
         private EventHandlerCommand _deleteTaskCommand = new EventHandlerCommand();
         public EventHandlerCommand DeleteTaskCommand
@@ -67,8 +65,8 @@ namespace WpfPractice.src.ViewModel
 
         public void DeleteTaskEventHandler(object parameter)
         {
-            TaskViewModels.Remove(SelectedTask);
-            OnPropertyChanged("Bucket.Tasks");
+            Tasks.Remove(SelectedTask);
+            OnPropertyChanged();
         }
 
     }

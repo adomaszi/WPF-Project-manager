@@ -36,7 +36,7 @@
                             <Button Content="Delete selected task"
                                     Command="{Binding DeleteTaskCommand}"
                                     CommandParameter="{Binding .}" />
-                            <ListBox ItemsSource="{Binding TaskViewModels}"
+                            <ListBox ItemsSource="{Binding Tasks}"
                                      SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
                                      Name="ListBox1"
                                      Height="400"

@@ -78,8 +78,8 @@ namespace WpfPractice.src.ViewModel
         }
         public void OpenTaskViewEventHandler(object parameter)
         {
-            TaskViewModel task = parameter as TaskViewModel;
-            TaskView taskView = new TaskView(task);
+            Task task = parameter as Task;
+            TaskView taskView = new TaskView(new TaskViewModel(task));
             taskView.Show();
         }
     }

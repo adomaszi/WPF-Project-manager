@@ -14,8 +14,11 @@
                 <DatePicker SelectedDate="{Binding DueDate}" />
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <Button Command="{Binding AddSubtaskCommand}">Add Subtask</Button>
-                <ListBox ItemsSource="{Binding SubtaskViewModels}"
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding AddSubtaskCommand}">Add Subtask</Button>
+                    <Button Command="{Binding DeleteSubtaskCommand}">Add Subtask</Button>
+                </StackPanel>
+                <ListBox ItemsSource="{Binding Subtasks}"
                          SelectedItem="{Binding SelectedSubtask, UpdateSourceTrigger=PropertyChanged}"
                          Name="ListBox1"
                          Height="400"
@@ -26,9 +29,9 @@
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Stretch">
                                 <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
-                                <TextBox Text="{Binding Subtask.Name}"
+                                <TextBox Text="{Binding Name}"
                                          Margin="0,0,5,0" />
-                                <CheckBox IsChecked="{Binding Subtask.IsDone}" />
+                                <CheckBox IsChecked="{Binding IsDone}" />
                             </StackPanel>
                             
                         </DataTemplate>

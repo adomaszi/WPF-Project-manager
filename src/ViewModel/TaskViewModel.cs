@@ -12,7 +12,7 @@ namespace WpfPractice.src.ViewModel
     public class TaskViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
         private Task _task;
-        ObservableCollection<SubtaskViewModel> _subtaskViewModels;
+        ObservableCollection<Subtask> _subtasks;
 
         public String Name { get => _task.Name; 
             set {
@@ -27,19 +27,16 @@ namespace WpfPractice.src.ViewModel
             } 
         }
         public Subtask SelectedSubtask { get; set; }
-        public ObservableCollection<SubtaskViewModel> SubtaskViewModels
+
+        public ObservableCollection<Subtask> Subtasks
         {
             get
             {
-                ObservableCollection<SubtaskViewModel> viewModels = new ObservableCollection<SubtaskViewModel>();
-                _task.SubtaskList.ForEach(delegate (Subtask subtask) {
-                    viewModels.Add(new SubtaskViewModel(subtask));
-                });
-                return viewModels;
+                return _subtasks;
             }
             set
             {
-
+                _subtasks = value;
             }
         }
 
@@ -71,7 +68,8 @@ namespace WpfPractice.src.ViewModel
 
         private void Setup()
         {
-            SubtaskViewModels.CollectionChanged += OnCollectionChanged;
+            _subtasks = _task.SubtaskList;
+            Subtasks.CollectionChanged += OnCollectionChanged;
 
             AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
             DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
@@ -106,7 +104,7 @@ namespace WpfPractice.src.ViewModel
         public void AddSubtaskEventHandler(object parameter)
         {
             Subtask subtask = new Subtask();
-            SubtaskViewModels.Add(new SubtaskViewModel(subtask));
+            Subtasks.Add(subtask);
             //OnCollectionChanged(SubtaskViewModels, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
         }
@@ -118,11 +116,7 @@ namespace WpfPractice.src.ViewModel
 
         public void DeleteSubtaskEventHandler(object parameter)
         {
-            SubtaskViewModel subtaskVM = parameter as SubtaskViewModel;
-            Subtask subtask = subtaskVM.Subtask;
-            SubtaskViewModels.Remove(subtaskVM);
-            _subtaskList.Remove(subtask);
-
+            Subtasks.Remove(SelectedSubtask);
         }
     }
 }
