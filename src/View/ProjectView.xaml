@@ -21,42 +21,22 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="4,0,4,0"
-                            Background="#FFEBECF0"
-                            CornerRadius="7"
-                            VerticalAlignment="Top">
-                        <StackPanel Orientation="Vertical"
-                                    Width="272">
-                            <TextBlock Text="{Binding Bucket.Name}"
-                                       FontSize="16"
-                                       Margin="10,10,0,10"
-                                       Foreground="Black" />
-                            <Button Content="Add task"
-                                    Command="{Binding AddTaskCommand}" />
-                            <Button Content="Delete selected task"
-                                    Command="{Binding DeleteTaskCommand}"
-                                    CommandParameter="{Binding .}" />
-                            <ListBox ItemsSource="{Binding Tasks}"
-                                     SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
-                                     Name="ListBox1"
-                                     Height="400"
-                                     Margin="4,4,0,0"
-                                     Width="250">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal"
-                                                    HorizontalAlignment="Stretch">
-                                            <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
-                                            <TextBox Text="{Binding Name}"
-                                                     Margin="0,0,5,0" />
-                                            <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenTaskViewCommand}"
-                                                    CommandParameter="{Binding .}">Expand</Button>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </Border>
+                    <StackPanel>
+                        <Button Margin="4,0,4,0"
+                                Background="#FFEBECF0"
+                                VerticalAlignment="Top"
+                                Content="Delete"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteBucketCommand}"
+                                CommandParameter="{Binding .}" />
+                        <Button Margin="4,0,4,0"
+                                Background="#FFEBECF0"
+                                VerticalAlignment="Top"
+                                Content="{Binding Name}"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenBucketViewCommand}"
+                                CommandParameter="{Binding .}" />
+                        <TextBlock Text="{Binding Tasks.Count}"></TextBlock>
+                    </StackPanel>
+                    
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

@@ -15,9 +15,9 @@ namespace WpfPractice.src.ViewModel
         private ObservableCollection<Project> _projects;
         public ObservableCollection<Project> Projects { get => _projects; set => _projects = value; }
 
-        public ProjectOverviewViewModel(List<Project> projects)
+        public ProjectOverviewViewModel(ObservableCollection<Project> projects)
         {
-            _projects = new ObservableCollection<Project>(projects);
+            _projects = projects;
             // Add CustomEventHandler
             _addProjectCommand.EventHandler += AddNewProjectEventHandler;
             _deleteProjectCommand.EventHandler += DeleteProjectEventHandler;

@@ -23,7 +23,12 @@ namespace WpfPractice.src.ViewModel
             _bucket = bucket;
             _tasks = bucket.Tasks;
             Tasks.CollectionChanged += this.OnCollectionChanged;
+            foreach(Task t in Tasks)
+            {
 
+                t.SubtaskList.CollectionChanged += this.OnCollectionChanged; 
+            }
+            OpenTaskViewCommand.EventHandler += OpenTaskViewEventHandler;
             AddTaskCommand.EventHandler += AddTaskEventHandler;
             DeleteTaskCommand.EventHandler += DeleteTaskEventHandler;
         }
@@ -48,6 +53,17 @@ namespace WpfPractice.src.ViewModel
         // *****************************************************************************
         // Commands
         // *****************************************************************************
+        public EventHandlerCommand _openTaskView = new EventHandlerCommand();
+        public EventHandlerCommand OpenTaskViewCommand
+        {
+            get { return _openTaskView; }
+        }
+        public void OpenTaskViewEventHandler(object parameter)
+        {
+            Task task = parameter as Task;
+            TaskView taskView = new TaskView(new TaskViewModel(task));
+            taskView.Show();
+        }
         private EventHandlerCommand _addTaskCommand = new EventHandlerCommand();
         public EventHandlerCommand AddTaskCommand
         {

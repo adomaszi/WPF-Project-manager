@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace WpfPractice.src.Model
@@ -8,17 +9,17 @@ namespace WpfPractice.src.Model
     {
         String _name;
         String _description;
-        List<Bucket> _buckets;
+        ObservableCollection<Bucket> _buckets;
 
         public Project()
         {
             _name = "[NO NAME]";
             _description = "[NO DESCRIPTION]";
-            _buckets = new List<Bucket>();
+            _buckets = new ObservableCollection<Bucket>();
         }
 
-        public string Name { get => _name; set => _name = value; }
-        public string Description { get => _description; set => _description = value; }
-        public List<Bucket> Buckets { get => _buckets; set => _buckets = value; }
+        public String Name { get => _name; set => _name = value; }
+        public String Description { get => _description; set => _description = value; }
+        public ObservableCollection<Bucket> Buckets { get => _buckets; set => _buckets = value; }
     }
 }

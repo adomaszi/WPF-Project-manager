@@ -9,17 +9,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfPractice.src.Model;
+using WpfPractice.src.ViewModel;
 
-namespace WpfPractice.View
+namespace WpfPractice.src.View
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for BucketView.xaml
     /// </summary>
-    public partial class TaskView : Window
+    public partial class BucketView : Window
     {
-        public TaskView()
+        BucketViewModel _viewModel;
+        public BucketView(Bucket bucket)
         {
             InitializeComponent();
+            _viewModel = new BucketViewModel(bucket);
+            this.DataContext = _viewModel;
         }
     }
 }

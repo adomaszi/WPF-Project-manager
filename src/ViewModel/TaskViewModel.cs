@@ -14,18 +14,25 @@ namespace WpfPractice.src.ViewModel
         private Task _task;
         ObservableCollection<Subtask> _subtasks;
 
-        public String Name { get => _task.Name; 
-            set {
-                _task.Name = value;
-                OnPropertyChanged();
-            }
+        public TaskViewModel(Task task)
+        {
+            _task = task;
+            _subtasks = _task.SubtaskList;
+            
+            AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
+            DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
         }
-        public String Description { get => _task.Description; 
-            set {
-                _task.Description = value;
-                OnPropertyChanged();
-            } 
+
+        public TaskViewModel()
+        {
+            _task = new Task();
+            _subtasks = _task.SubtaskList;
+            Subtasks.CollectionChanged += OnCollectionChanged;
+
+            AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
+            DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
         }
+
         public Subtask SelectedSubtask { get; set; }
 
         public ObservableCollection<Subtask> Subtasks
@@ -53,28 +60,26 @@ namespace WpfPractice.src.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public TaskViewModel(Task task)
+        public String Name
         {
-            _task = task;
-            Setup();
+            get => _task.Name;
+            set
+            {
+                _task.Name = value;
+                OnPropertyChanged();
+            }
+        }
+        public String Description
+        {
+            get => _task.Description;
+            set
+            {
+                _task.Description = value;
+                OnPropertyChanged();
+            }
         }
 
-        public TaskViewModel()
-        {
-            _task = new Task();
-            Setup();
-        }
-
-        private void Setup()
-        {
-            _subtasks = _task.SubtaskList;
-            Subtasks.CollectionChanged += OnCollectionChanged;
-
-            AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
-            DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
-
-        }
+        
 
         // *****************************************************************************
         // BINDING UPDATES

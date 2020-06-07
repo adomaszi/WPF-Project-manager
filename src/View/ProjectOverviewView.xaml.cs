@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfPractice.src.ViewModel;
 using WpfPractice.src.Model;
+using System.Collections.ObjectModel;
 
 namespace WpfPractice.src.View
 {
@@ -21,7 +22,7 @@ namespace WpfPractice.src.View
     public partial class ProjectOverviewView : UserControl
     {
         private ProjectOverviewViewModel _viewModel;
-        public ProjectOverviewView(List<Project> projects)
+        public ProjectOverviewView(ObservableCollection<Project> projects)
         {
             _viewModel = new ProjectOverviewViewModel(projects);
             this.DataContext = _viewModel;

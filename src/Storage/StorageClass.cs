@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.DirectoryServices;
 using System.Text;
 using WpfPractice.src.Model;
@@ -8,8 +9,8 @@ namespace WpfPractice.src.Storage
 {
     public class StorageClass
     {
-        List<Employee> _employees;
-        List<Project> _projects;
+        ObservableCollection<Employee> _employees;
+        ObservableCollection<Project> _projects;
 
         public StorageClass()
         {
@@ -19,8 +20,8 @@ namespace WpfPractice.src.Storage
         private void SetUpStorage()
         {
             // Create mock data for testing 
-            _projects = CreateProjects();
-            _employees = CreateEmployees();
+            _projects = new ObservableCollection<Project>(CreateProjects());
+            _employees = new ObservableCollection<Employee>(CreateEmployees());
         }
 
         private List<Project> CreateProjects()
@@ -149,9 +150,9 @@ namespace WpfPractice.src.Storage
 
             return tasks;
         }
+     
 
-
-        public List<Employee> Employees { get => _employees; set => _employees = value; }
-        public List<Project> Projects { get => _projects; set => _projects = value; }
+        public ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
+        public ObservableCollection<Project> Projects { get => _projects; set => _projects = value; }
     }
 }
