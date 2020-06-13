@@ -23,6 +23,7 @@ namespace WpfPractice.src.ViewModel
             AddBucketCommand.EventHandler += AddBucketEventHandler;
             DeleteBucketCommand.EventHandler += DeleteBucketEventHandler;
             OpenBucketViewCommand.EventHandler += OpenBucketViewEventHandler;
+            OpenStatsViewCommand.EventHandler += OpenStatsViewEventHandler;
 
             _buckets = _project.Buckets;
       
@@ -80,6 +81,19 @@ namespace WpfPractice.src.ViewModel
             BucketView bucketView = new BucketView(bucket);
             
             bucketView.Show();
+        }
+
+        public EventHandlerCommand _openStatsView = new EventHandlerCommand();
+        public EventHandlerCommand OpenStatsViewCommand
+        {
+            get { return _openStatsView; }
+        }
+        public void OpenStatsViewEventHandler(object parameter)
+        {
+            Project project = parameter as Project;
+            ProjectStatsView projectStatsView = new ProjectStatsView(project);
+
+            projectStatsView.Show();
         }
     }
 }

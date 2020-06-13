@@ -64,6 +64,7 @@
                                         HorizontalAlignment="Stretch">
                                 <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
                                 <CheckBox IsChecked="{Binding IsDone}"
+                                          IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.CanClickCompleteSubtasks}"
                                           Margin="0 0 10 0"
                                           Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DoneCommand}"
                                           CommandParameter="{Binding .}"
@@ -87,6 +88,7 @@
                                         HorizontalAlignment="Stretch">
                                 <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
                                 <CheckBox IsChecked="{Binding IsDone}"
+                                          IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.CanClickCompleteSubtasks}"
                                           Margin="0 0 10 0"
                                           Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NotDoneCommand}"
                                           CommandParameter="{Binding .}" />

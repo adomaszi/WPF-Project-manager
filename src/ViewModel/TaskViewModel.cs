@@ -20,6 +20,15 @@ namespace WpfPractice.src.ViewModel
         ObservableCollection<Subtask> _subtasks;
         ObservableCollection<Subtask> _doneSubtasks;
 
+    
+
+        public string CanClickCompleteSubtasks
+        {
+            get { return _bucket == null ? "False" : "True"; }
+            set {}
+        }
+
+
 
         public ObservableCollection<Subtask> DoneSubtasks
         {
@@ -202,18 +211,19 @@ namespace WpfPractice.src.ViewModel
 
         public void NotDoneEventHandler(object parameter)
         {
-            Subtask subtask = parameter as Subtask;
-
-            DoneSubtasks.Remove(subtask);
-            Subtasks.Add(subtask);
             if (Bucket != null)
             {
-                 if (Bucket.DoneTasks.Remove(_task))
-                 {
-                    Bucket.Tasks.Add(_task);
-                 }
+                Subtask subtask = parameter as Subtask;
+
+                DoneSubtasks.Remove(subtask);
+                Subtasks.Add(subtask);
+            
+                     if (Bucket.DoneTasks.Remove(_task))
+                     {
+                        Bucket.Tasks.Add(_task);
+                     }
+                }
             }
-        }
            
     }
 }
