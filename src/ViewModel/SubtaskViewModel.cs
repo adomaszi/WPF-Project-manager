@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using WpfPractice.src.Model;
 
 namespace WpfPractice.src.ViewModel
 {
-    public class SubtaskViewModel : INotifyPropertyChanged
+    public class SubtaskViewModel: INotifyPropertyChanged
     {
         Subtask _subtask;
 

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using WpfPractice.src.Model;
 using WpfPractice.src.Storage;
 
@@ -20,7 +22,7 @@ namespace WpfPractice.src.ViewModel
             Employees = StorageClass.Employees;
             _task = task;
             _subtasks = _task.SubtaskList;
-
+            
             AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
             DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
         }
@@ -49,18 +51,13 @@ namespace WpfPractice.src.ViewModel
             }
         }
 
-        public DateTime DueDate
-        {
-            get => _task.DueDate;
-            set
-            {
+        public DateTime DueDate { get => _task.DueDate; 
+            set {
                 _task.DueDate = value;
                 OnPropertyChanged();
             }
         }
-        public Employee Employee
-        {
-            get => _task.Employee;
+        public Employee Employee { get => _task.Employee;
             set
             {
                 _task.Employee = value;
@@ -86,7 +83,7 @@ namespace WpfPractice.src.ViewModel
             }
         }
 
-
+        
 
         // *****************************************************************************
         // BINDING UPDATES
@@ -127,22 +124,18 @@ namespace WpfPractice.src.ViewModel
         }
 
         public ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
-        public Employee SelectedEmployee
-        {
-            get => _task.Employee; set
-            {
+        public Employee SelectedEmployee { get => _task.Employee; set {
                 Employee e = _task.Employee;
                 if (e != null)
                 {
                     e.Tasks.Remove(_task);
                 }
-                _selectedEmployee = value;
+                _selectedEmployee = value; 
                 _task.Employee = value;
                 _task.Employee.Tasks.Add(_task);
 
-                OnPropertyChanged();
-            }
-        }
+                OnPropertyChanged(); 
+            } }
 
         public void DeleteSubtaskEventHandler(object parameter)
         {

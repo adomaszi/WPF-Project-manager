@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using WpfPractice.src.Model;
 using WpfPractice.src.View;
 
@@ -23,7 +25,7 @@ namespace WpfPractice.src.ViewModel
             OpenBucketViewCommand.EventHandler += OpenBucketViewEventHandler;
 
             _buckets = _project.Buckets;
-
+      
         }
 
         // *****************************************************************************
@@ -53,7 +55,7 @@ namespace WpfPractice.src.ViewModel
         }
         public void AddBucketEventHandler(object parameter)
         {
-
+            
             Buckets.Add(new Bucket());
         }
         public EventHandlerCommand _deleteBucketCommand = new EventHandlerCommand();
@@ -66,7 +68,7 @@ namespace WpfPractice.src.ViewModel
             Bucket bucket = parameter as Bucket;
             _project.Buckets.Remove(bucket);
         }
-
+        
         public EventHandlerCommand _openBucketView = new EventHandlerCommand();
         public EventHandlerCommand OpenBucketViewCommand
         {
