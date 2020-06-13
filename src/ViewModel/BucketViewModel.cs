@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using WpfPractice.src.Model;
 using WpfPractice.src.View;
 
@@ -17,16 +15,16 @@ namespace WpfPractice.src.ViewModel
         private Task _selectedTask;
         public Task SelectedTask { get => _selectedTask; set { _selectedTask = value; OnPropertyChanged("SelectedTask"); } }
         private ObservableCollection<Task> _tasks;
-        public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value;} }
+        public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value; } }
         public BucketViewModel(Bucket bucket)
         {
             _bucket = bucket;
             _tasks = bucket.Tasks;
             Tasks.CollectionChanged += this.OnCollectionChanged;
-            foreach(Task t in Tasks)
+            foreach (Task t in Tasks)
             {
 
-                t.SubtaskList.CollectionChanged += this.OnCollectionChanged; 
+                t.SubtaskList.CollectionChanged += this.OnCollectionChanged;
             }
             OpenTaskViewCommand.EventHandler += OpenTaskViewEventHandler;
             AddTaskCommand.EventHandler += AddTaskEventHandler;

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using WpfPractice.src.Model;
 using WpfPractice.src.Storage;
 using WpfPractice.src.View;

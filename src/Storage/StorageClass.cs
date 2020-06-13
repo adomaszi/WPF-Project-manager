@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.DirectoryServices;
-using System.Text;
 using WpfPractice.src.Model;
 
 namespace WpfPractice.src.Storage
@@ -92,7 +89,7 @@ namespace WpfPractice.src.Storage
             return buckets;
         }
 
-        private static List<Task> CreateTasks() 
+        private static List<Task> CreateTasks()
         {
             List<Task> tasks = new List<Task>();
             Task makeBread = new Task();
@@ -149,7 +146,7 @@ namespace WpfPractice.src.Storage
 
             return tasks;
         }
-     
+
 
         public static ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
         public static ObservableCollection<Project> Projects { get => _projects; set => _projects = value; }
