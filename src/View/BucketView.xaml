@@ -4,48 +4,68 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPractice.src.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="BucketView" Height="450" Width="800">
-    <Grid>
-        <Border Margin="4,0,4,0"
-                Background="#FFEBECF0"
-                CornerRadius="7"
+        Title="BucketView" Height="700" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <StackPanel>
+
+        <materialDesign:Card Margin="30" Padding="10"
                 VerticalAlignment="Top">
-            <StackPanel Orientation="Vertical"
-                        Width="272">
+            <StackPanel Orientation="Vertical">
                 <TextBox Text="{Binding Bucket.Name}"
-                           FontSize="16"
-                           Margin="10,10,0,10"
-                           Foreground="Black" />
-                <Button Content="Add task"
-                        Command="{Binding AddTaskCommand}" />
-                <Button Content="Delete selected task"
-                        Command="{Binding DeleteTaskCommand}"
-                        CommandParameter="{Binding .}" />
+                         FontSize="16" />
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 20 0 0">
+                    <Button Command="{Binding AddTaskCommand}"
+                            Margin="0 0 10 0"
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}">Add task</Button>
+                    <Button Command="{Binding DeleteTaskCommand}"
+                            CommandParameter="{Binding .}"
+                            Background="{DynamicResource Warning}"
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}">Delete task</Button>
+                </StackPanel>
+                <ScrollViewer>
                 <ListBox ItemsSource="{Binding Tasks}"
                          SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
                          Name="ListBox1"
-                         Height="400"
-                         Margin="4,4,0,0"
-                         Width="250">
+                         Margin="0 20" 
+                         Height="450">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Stretch">
                                 <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
-                                <TextBox Text="{Binding Name}"
-                                         Margin="0,0,5,0" />
-                                <TextBox Text="{Binding SubtaskList.Count , Mode=OneWay}"
-                                         Margin="0,0,5,0" />
-                                <TextBox Text="{Binding SubtaskListIsDoneCount , Mode=OneWay}"
-                                         Margin="0,0,5,0" />
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenTaskViewCommand}"
-                                        CommandParameter="{Binding .}">Expand</Button>
+                                        CommandParameter="{Binding .}"
+                                        Margin="10 0 0 0"
+                                        Style="{DynamicResource MaterialDesignRaisedAccentButton}">Expand</Button>
+                                <TextBox Text="{Binding Name}"
+                                             Margin="10 0 0 0"
+                                             MinWidth="200" />
+                                    <TextBox IsEnabled="False"
+                                             Text="Subtask count: "
+                                             Margin="10 0 0 0" />
+                                    <TextBox IsEnabled="False" Text="{Binding SubtaskList.Count , Mode=OneWay}"
+                                         />
+                                    <TextBox IsEnabled="False"
+                                             Text="Done count: "
+                                             Margin="10 0 0 0" />
+                                    <TextBox IsEnabled="False"
+                                             Text="{Binding SubtaskListIsDoneCount , Mode=OneWay}"
+                                             />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                </ScrollViewer>
             </StackPanel>
-        </Border>
-    </Grid>
+        </materialDesign:Card>
+    </StackPanel>
 </Window>

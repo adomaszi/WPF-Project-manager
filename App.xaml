@@ -4,6 +4,35 @@
              xmlns:local="clr-namespace:WpfPractice"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- primary hues  -->
+            <SolidColorBrush x:Key="PrimaryHueLightBrush"
+                             Color="#03CEA4" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush"
+                             Color="#03CEA4" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush"
+                             Color="#03CEA4" />
+            <!-- Text  -->
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush"
+                             Color="#23242F" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush"
+                             Color="#03CEA4" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush"
+                             Color="#03CEA4" /> 
+            <SolidColorBrush x:Key="Warning"
+                             Color="#D84654" />
+            <!--  accent -->
+            <SolidColorBrush x:Key="SecondaryAccentBrush"
+                             Color="#FDD35D" />
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush"
+                             Color="#23242F" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

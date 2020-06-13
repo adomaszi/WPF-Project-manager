@@ -4,59 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfPractice.src.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"  
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <Border Margin="4,0,4,0"
-                Background="#FFEBECF0"
-                CornerRadius="7"
-                VerticalAlignment="Top">
-            <StackPanel Orientation="Vertical">
-                <Button Command="{Binding AddEmployeeCommand}">Add</Button>
-                <ItemsControl ItemsSource="{Binding Employees}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Margin="4,0,4,0"
-                            Background="#FFEBECF0"
-                            CornerRadius="7"
-                            Width="272">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBox Text="{Binding Name}"></TextBox>
-                                    <ListBox ItemsSource="{Binding .Tasks}"
-                                         Name="ListBox1"
-                                         Height="400"
-                                         Margin="4,4,0,0"
-                                         Width="250">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Stretch">
-                                                    <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
-                                                    <TextBox Text="{Binding Name}"
-                                         Margin="0,0,5,0" />
-                                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenTaskViewCommand}"
-                                        CommandParameter="{Binding .}">Expand</Button>
-                                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.UnassignTaskCommand}"
-                                        CommandParameter="{Binding .}">Unassign</Button>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-
-                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DeleteEmployeeCommand}"
-                                        CommandParameter="{Binding .}">Delete</Button>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding AddEmployeeCommand}"
+                        Margin="10 10 0 0"
+                        Style="{DynamicResource MaterialDesignRaisedAccentButton}">Add Employee</Button>
             </StackPanel>
-        </Border>
-            
+            <ItemsControl ItemsSource="{Binding Employees}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Margin="10 10">
+                            <StackPanel Orientation="Vertical">
+                                <TextBox Text="{Binding Name}"
+                                         Padding="3 3"></TextBox>
+                                <ListBox ItemsSource="{Binding .Tasks}"
+                                         Name="ListBox1"
+                                         MinWidth="250"
+                                         >
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Stretch">
+                                                <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
+                                                <TextBox Text="{Binding Name}"
+                                                        />
+                                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenTaskViewCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        Margin="15 0 5 0"
+                                                        Style="{DynamicResource MaterialDesignRaisedAccentButton}">Expand</Button>
+                                                <Button  Margin="10 0 5 0"
+                                                         Background="{DynamicResource Warning}"
+                                                         Style="{DynamicResource MaterialDesignRaisedAccentButton}"
+                                                         Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.UnassignTaskCommand}"
+                                                        CommandParameter="{Binding .}">Unassign</Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DeleteEmployeeCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Background="{DynamicResource Warning}"
+                                        Style="{DynamicResource MaterialDesignRaisedAccentButton}">Delete</Button>
+                            </StackPanel>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -5,12 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPractice.src.View"
         mc:Ignorable="d"
-        Title="WindowMain" Height="450" Width="800">
+        Title="WindowMain"
+        Height="450"
+        Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <TabControl Name="tcSample">
+        <TabControl Name="tcSample"
+                    
+                    Background="{DynamicResource MaterialDesignCardBackground}">
             <TabItem Header="Project Overiew"
-                     x:Name="ProjectOverviewTabItem">
-                <Label Content="Content goes here..." />
+                     x:Name="ProjectOverviewTabItem"
+                     >
+                <Label Content="Content goes here..."/>
             </TabItem>
             <TabItem Header="Employee Overiew"
                      x:Name="EmplyeeOverviewTabItem">
