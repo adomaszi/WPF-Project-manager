@@ -58,9 +58,8 @@
                                              Text="Done count: "
                                              Margin="10 0 0 0" />
                                     <TextBox IsEnabled="False"
-                                             Text="{Binding SubtaskListIsDoneCount , Mode=OneWay}"
-                                             />
-                            </StackPanel>
+                                             Text="{Binding DoneSubtaskList.Count , Mode=OneWay}" />
+                                </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

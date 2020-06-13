@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Timers;
 using WpfPractice.src.Model;
 using WpfPractice.src.View;
 
@@ -13,11 +15,12 @@ namespace WpfPractice.src.ViewModel
     class BucketViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
         private Bucket _bucket;
+        private Project _project;
         public Bucket Bucket { get => _bucket; set => _bucket = value; }
         private Task _selectedTask;
-        public Task SelectedTask { get => _selectedTask; set { _selectedTask = value; OnPropertyChanged("SelectedTask"); } }
+        public Task SelectedTask { get => _selectedTask; set { _selectedTask = value; OnPropertyChanged(); } }
         private ObservableCollection<Task> _tasks;
-        public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value;} }
+        public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value; OnPropertyChanged(); } }
         public BucketViewModel(Bucket bucket)
         {
             _bucket = bucket;
@@ -27,6 +30,7 @@ namespace WpfPractice.src.ViewModel
             {
 
                 t.SubtaskList.CollectionChanged += this.OnCollectionChanged; 
+
             }
             OpenTaskViewCommand.EventHandler += OpenTaskViewEventHandler;
             AddTaskCommand.EventHandler += AddTaskEventHandler;
@@ -61,7 +65,7 @@ namespace WpfPractice.src.ViewModel
         public void OpenTaskViewEventHandler(object parameter)
         {
             Task task = parameter as Task;
-            TaskView taskView = new TaskView(new TaskViewModel(task));
+            TaskView taskView = new TaskView(new TaskViewModel(task, _bucket));
             taskView.Show();
         }
         private EventHandlerCommand _addTaskCommand = new EventHandlerCommand();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using WpfPractice.src.Model;
@@ -13,29 +14,54 @@ namespace WpfPractice.src.ViewModel
     public class TaskViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
         private Task _task;
+        private Bucket _bucket;
         private Employee _selectedEmployee;
         private ObservableCollection<Employee> _employees;
         ObservableCollection<Subtask> _subtasks;
+        ObservableCollection<Subtask> _doneSubtasks;
+
+
+        public ObservableCollection<Subtask> DoneSubtasks
+        {
+            get
+            {
+                return _task.DoneSubtaskList;
+            }
+            set
+            {
+                _task.DoneSubtaskList = value;
+            }
+
+        }
+
+        public TaskViewModel(Task task, Bucket bucket)
+        {
+            Bucket = bucket;
+            Employees = StorageClass.Employees;
+            _task = task;
+            _subtasks = _task.SubtaskList;
+            _doneSubtasks = _task.DoneSubtaskList;
+
+            AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
+            DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
+            _doneCommand = new TaskEventHandlerCommand(this);
+            _notDoneCommand = new TaskEventHandlerCommand(this);
+            DoneCommand.EventHandler += DoneEventHandler;
+          
+            NotDoneCommand.EventHandler += NotDoneEventHandler;
+        }
 
         public TaskViewModel(Task task)
         {
             Employees = StorageClass.Employees;
             _task = task;
             _subtasks = _task.SubtaskList;
-            
-            AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
-            DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
-        }
-
-        public TaskViewModel()
-        {
-            _task = new Task();
-            _subtasks = _task.SubtaskList;
-            Subtasks.CollectionChanged += OnCollectionChanged;
+            _doneSubtasks = _task.DoneSubtaskList;
 
             AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
             DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
         }
+
 
         public Subtask SelectedSubtask { get; set; }
 
@@ -114,13 +140,24 @@ namespace WpfPractice.src.ViewModel
         {
             Subtask subtask = new Subtask();
             Subtasks.Add(subtask);
-            //OnCollectionChanged(SubtaskViewModels, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
         }
         private EventHandlerCommand _deleteTaskCommand = new EventHandlerCommand();
         public EventHandlerCommand DeleteSubtaskCommand
         {
             get { return _deleteTaskCommand; }
+        }
+
+        private TaskEventHandlerCommand _doneCommand;
+        public TaskEventHandlerCommand DoneCommand
+        {
+            get { return _doneCommand; }
+        }
+
+        private TaskEventHandlerCommand _notDoneCommand;
+        public TaskEventHandlerCommand NotDoneCommand
+        {
+            get { return _notDoneCommand; }
         }
 
         public ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
@@ -137,9 +174,46 @@ namespace WpfPractice.src.ViewModel
                 OnPropertyChanged(); 
             } }
 
+        public Bucket Bucket { get => _bucket; set => _bucket = value; }
+
         public void DeleteSubtaskEventHandler(object parameter)
         {
             Subtasks.Remove(SelectedSubtask);
         }
+
+        public void DoneEventHandler(object parameter)
+        {
+            Subtask subtask = parameter as Subtask;
+                
+            Subtasks.Remove(subtask);
+            DoneSubtasks.Add(subtask);
+            if (Bucket != null)
+            {
+                if (Subtasks.Count == 0)
+                {
+                    if (Bucket.Tasks.Remove(_task))
+                    {
+                        Bucket.DoneTasks.Add(_task);
+                    }
+                }
+            }
+            
+        }
+
+        public void NotDoneEventHandler(object parameter)
+        {
+            Subtask subtask = parameter as Subtask;
+
+            DoneSubtasks.Remove(subtask);
+            Subtasks.Add(subtask);
+            if (Bucket != null)
+            {
+                 if (Bucket.DoneTasks.Remove(_task))
+                 {
+                    Bucket.Tasks.Add(_task);
+                 }
+            }
+        }
+           
     }
 }

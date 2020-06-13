@@ -78,6 +78,7 @@ namespace WpfPractice.src.ViewModel
         {
             Bucket bucket = parameter as Bucket;
             BucketView bucketView = new BucketView(bucket);
+            
             bucketView.Show();
         }
     }

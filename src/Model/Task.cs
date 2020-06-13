@@ -12,6 +12,7 @@ namespace WpfPractice.src.Model
         String _description;
         DateTime _dueDate;
         ObservableCollection<Subtask> _subtaskList;
+        ObservableCollection<Subtask> _doneSubtaskList;
         Employee _employee;
 
         public Task()
@@ -20,6 +21,7 @@ namespace WpfPractice.src.Model
             Description = "[EMPTY]";
             DueDate = DateTime.Now;
             SubtaskList = new ObservableCollection<Subtask>();
+            DoneSubtaskList = new ObservableCollection<Subtask>();
             Employee = null;
         }
 
@@ -27,22 +29,20 @@ namespace WpfPractice.src.Model
         public String Description { get => _description; set => _description = value; }
         public DateTime DueDate { get => _dueDate; set => _dueDate = value; }
 
-        public ObservableCollection<Subtask> SubtaskList { get => _subtaskList; set {
-                _subtaskList = value; ResetIsDoneCount(); } }
+        public ObservableCollection<Subtask> SubtaskList { 
+            get => _subtaskList; 
+            set {
+                _subtaskList = value; 
+            } 
+        }
 
-        public int SubtaskListIsDoneCount { get; private set; } = 0;
-        public void ResetIsDoneCount()
+        public ObservableCollection<Subtask> DoneSubtaskList
         {
-            int count = 0;
-
-            foreach (Subtask s in SubtaskList)
+            get => _doneSubtaskList;
+            set
             {
-                if (s.IsDone)
-                {
-                    count += 1;
-                }
+                _doneSubtaskList = value;
             }
-            SubtaskListIsDoneCount = count;
         }
 
         public Employee Employee { get => _employee; set => _employee = value; }

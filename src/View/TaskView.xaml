@@ -53,10 +53,33 @@
                             Background="{DynamicResource Warning}"
                             Style="{DynamicResource MaterialDesignRaisedAccentButton}">Delete Subtask</Button>
                 </StackPanel>
+                
                 <ListBox ItemsSource="{Binding Subtasks}"
                          SelectedItem="{Binding SelectedSubtask, UpdateSourceTrigger=PropertyChanged}"
-                         Name="ListBox1"
-                         Height="400"
+                         Width="250"
+                         Margin="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Stretch">
+                                <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
+                                <CheckBox IsChecked="{Binding IsDone}"
+                                          Margin="0 0 10 0"
+                                          Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DoneCommand}"
+                                          CommandParameter="{Binding .}"
+                                          />
+                                <TextBox Text="{Binding Name}"
+                                          MinWidth="200"/>
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
+                           Margin="0 20 0 0">Done Subtasks</TextBlock>
+                <ListBox ItemsSource="{Binding DoneSubtasks}"
+                         SelectedItem="{Binding SelectedSubtask, UpdateSourceTrigger=PropertyChanged}"
+                         
                          Width="250">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -64,11 +87,12 @@
                                         HorizontalAlignment="Stretch">
                                 <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
                                 <CheckBox IsChecked="{Binding IsDone}"
-                                          Margin="0 0 10 0" />
+                                          Margin="0 0 10 0"
+                                          Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NotDoneCommand}"
+                                          CommandParameter="{Binding .}" />
                                 <TextBox Text="{Binding Name}"
-                                          MinWidth="200"/>
+                                         MinWidth="200" />
                             </StackPanel>
-                            
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
