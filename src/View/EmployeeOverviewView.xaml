@@ -21,6 +21,11 @@
                 <Button Command="{Binding AddEmployeeCommand}"
                         Margin="10 10 0 0"
                         Style="{DynamicResource MaterialDesignRaisedAccentButton}">Add Employee</Button>
+                <Button Content="Stats"
+                        Margin="10 10 0 0"
+                        Command="{Binding OpenEmployeeStatsViewCommand}"
+                        CommandParameter="{Binding Employees}"
+                        Style="{DynamicResource MaterialDesignRaisedAccentButton}" Cursor="Hand" />
             </StackPanel>
             <ItemsControl ItemsSource="{Binding Employees}">
                 <ItemsControl.ItemsPanel>

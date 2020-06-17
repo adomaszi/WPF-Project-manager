@@ -35,11 +35,11 @@
             <Button Command="{Binding AddBucketCommand}"
                     Margin="5 10 0 10"
                     Style="{DynamicResource MaterialDesignRaisedAccentButton}">Add List</Button>
-                <Button Content="Stats"
-                        Command="{Binding OpenStatsViewCommand}"
-                        CommandParameter="{Binding Project}"
-                        Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
-            </StackPanel>
+            <Button Content="Stats"
+                    Command="{Binding OpenStatsViewCommand}"
+                    CommandParameter="{Binding Project}"
+                    Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
+        </StackPanel>
         <ItemsControl ItemsSource="{Binding Buckets}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

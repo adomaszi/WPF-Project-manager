@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 using WpfPractice.src.Model;
 using WpfPractice.src.Storage;
@@ -23,6 +24,7 @@ namespace WpfPractice.src.ViewModel
             _addEmployeeCommand.EventHandler += AddNewEmployeeEventHandler;
             _deleteEmployeeCommand.EventHandler += DeleteEmployeeEventHandler;
             _unassignTaskCommand.EventHandler += UnassignTaskEventHandler;
+            _openEmployeeStatsViewCommand.EventHandler += OpenStatsViewEventHandler;
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -66,6 +68,7 @@ namespace WpfPractice.src.ViewModel
             Employee employee = parameter as Employee;
             _employees.Remove(employee);
         }
+
         public EventHandlerCommand _unassignTaskCommand = new EventHandlerCommand();
         public EventHandlerCommand UnassignTaskCommand
         {
@@ -78,7 +81,20 @@ namespace WpfPractice.src.ViewModel
             task.Employee = null;
             employee.Tasks.Remove(task);
         }
-        
+
+        public EventHandlerCommand _openEmployeeStatsViewCommand = new EventHandlerCommand();
+        public EventHandlerCommand OpenEmployeeStatsViewCommand
+        {
+            get { return _openEmployeeStatsViewCommand; }
+        }
+        public void OpenStatsViewEventHandler(object parameter)
+        {
+            ObservableCollection<Employee> employees = parameter as ObservableCollection<Employee>;
+            EmployeeStatsView employeeStatsView = new EmployeeStatsView(employees);
+
+            employeeStatsView.Show();
+        }
+
 
         public ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
     }
