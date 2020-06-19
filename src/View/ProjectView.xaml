@@ -17,66 +17,61 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <ScrollViewer>
-    <StackPanel Orientation="Vertical"
-                Margin="10 10 0 0">
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <Label Content="Project name: "
-                        />
-                <TextBox Margin="2 0 0 0" Text="{Binding Project.Name}" />
+        <StackPanel Orientation="Vertical"
+                    Margin="10 10 0 0">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Project name: " />
+                    <TextBox Margin="2 0 0 0"
+                             Text="{Binding Project.Name}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Project description: " />
+                    <TextBox Margin="2 0 0 0"
+                             Text="{Binding Project.Description}" />
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <Label Content="Project description: " />
-                <TextBox Margin="2 0 0 0"
-                         Text="{Binding Project.Description}" />
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding AddBucketCommand}"
+                        Margin="5 10 0 10"
+                        Style="{DynamicResource MaterialDesignRaisedAccentButton}">Add List</Button>
+                <Button Content="Stats"
+                        Command="{Binding OpenStatsViewCommand}"
+                        CommandParameter="{Binding Project}"
+                        Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
             </StackPanel>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding AddBucketCommand}"
-                    Margin="5 10 0 10"
-                    Style="{DynamicResource MaterialDesignRaisedAccentButton}">Add List</Button>
-            <Button Content="Stats"
-                    Command="{Binding OpenStatsViewCommand}"
-                    CommandParameter="{Binding Project}"
-                    Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
-        </StackPanel>
-        <ItemsControl ItemsSource="{Binding Buckets}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <materialDesign:Card Margin="5 20 15 0">
-                        <StackPanel Orientation="Vertical" MinWidth="250" >
-                            <TextBox Text="{Binding Name}"
-                                     Padding="3 3" />
-                            <StackPanel Orientation="Horizontal"
-                                        Margin="3 3">
-                                <TextBlock Text="Task count: "
-                                           ></TextBlock>
-                                <TextBlock Text="{Binding Tasks.Count}"></TextBlock>
+            <ItemsControl ItemsSource="{Binding Buckets}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Margin="5 20 15 0">
+                            <StackPanel Orientation="Vertical"
+                                        MinWidth="250">
+                                <TextBox Text="{Binding Name}"
+                                         Padding="3 3" />
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="3 3">
+                                    <TextBlock Text="Task count: "></TextBlock>
+                                    <TextBlock Text="{Binding Tasks.Count}"></TextBlock>
+                                </StackPanel>
+                                <Button Content="Delete"
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteBucketCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Background="{DynamicResource Warning}"
+                                        Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
+                                <Button Content="Expand"
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenBucketViewCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
                             </StackPanel>
-                            
-                            <Button 
-                                Content="Delete"
-                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteBucketCommand}"
-                                    CommandParameter="{Binding .}"
-                                    Background="{DynamicResource Warning}"
-                                    Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
-                        <Button 
-                                Content="Expand"
-                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenBucketViewCommand}"
-                                CommandParameter="{Binding .}"
-                                    Style="{DynamicResource MaterialDesignRaisedAccentButton}" />
-                        
-                            </StackPanel>
-                </materialDesign:Card>
-                    
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </ScrollViewer>
 </Window>

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WpfPractice.src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="BucketView" Height="700" Width="800"
+        Title="BucketView"
+        Height="700"
+        Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -15,9 +17,9 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <StackPanel>
-
-        <materialDesign:Card Margin="30" Padding="10"
-                VerticalAlignment="Top">
+        <materialDesign:Card Margin="30"
+                             Padding="10"
+                             VerticalAlignment="Top">
             <StackPanel Orientation="Vertical">
                 <TextBox Text="{Binding Bucket.Name}"
                          FontSize="16" />
@@ -32,43 +34,42 @@
                             Style="{DynamicResource MaterialDesignRaisedAccentButton}">Delete task</Button>
                 </StackPanel>
                 <ScrollViewer>
-            <StackPanel>
-            <ListBox ItemsSource="{Binding Tasks}"
-                         SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
-                         Name="ListBox1"
-                         Margin="0 20" 
-                         Height="250">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Stretch">
-                                <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
-                                <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenTaskViewCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Margin="10 0 0 0"
-                                        Style="{DynamicResource MaterialDesignRaisedAccentButton}">Expand</Button>
-                                <TextBox Text="{Binding Name}"
-                                             Margin="10 0 0 0"
-                                             MinWidth="200" />
-                                    <TextBox IsEnabled="False"
-                                             Text="Subtask count: "
-                                             Margin="10 0 0 0" />
-                                    <TextBox IsEnabled="False" Text="{Binding SubtaskList.Count , Mode=OneWay}"
-                                         />
-                                    <TextBox IsEnabled="False"
-                                             Text="Done count: "
-                                             Margin="10 0 0 0" />
-                                    <TextBox IsEnabled="False"
-                                             Text="{Binding DoneSubtaskList.Count , Mode=OneWay}" />
-                                    <TextBox IsEnabled="False"
-                                                Text="Employee: "
-                                                Margin="10 0 0 0" />
-                                    <TextBox IsEnabled="False"
-                                                Text="{Binding Employee.Name , Mode=OneWay}" />
+                    <StackPanel>
+                        <ListBox ItemsSource="{Binding Tasks}"
+                                 SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
+                                 Name="ListBox1"
+                                 Margin="0 20"
+                                 Height="250">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Stretch">
+                                        <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenTaskViewCommand}"
+                                                CommandParameter="{Binding .}"
+                                                Margin="10 0 0 0"
+                                                Style="{DynamicResource MaterialDesignRaisedAccentButton}">Expand</Button>
+                                        <TextBox Text="{Binding Name}"
+                                                 Margin="10 0 0 0"
+                                                 MinWidth="200" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="Subtask count: "
+                                                 Margin="10 0 0 0" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="{Binding SubtaskList.Count , Mode=OneWay}" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="Done count: "
+                                                 Margin="10 0 0 0" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="{Binding DoneSubtaskList.Count , Mode=OneWay}" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="Employee: "
+                                                 Margin="10 0 0 0" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="{Binding Employee.Name , Mode=OneWay}" />
                                     </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                         <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
                                    Margin="0 20 0 0">Done tasks</TextBlock>
                         <ListBox ItemsSource="{Binding DoneTasks}"
@@ -78,7 +79,6 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal"
                                                 HorizontalAlignment="Stretch">
-                                        <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
                                         <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenTaskViewCommand}"
                                                 CommandParameter="{Binding .}"
                                                 Margin="10 0 0 0"
@@ -101,7 +101,7 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </StackPanel>
-            </ScrollViewer>
+                </ScrollViewer>
             </StackPanel>
         </materialDesign:Card>
     </StackPanel>
