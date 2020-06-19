@@ -20,11 +20,14 @@ namespace WpfPractice.src.ViewModel
         private Task _selectedTask;
         public Task SelectedTask { get => _selectedTask; set { _selectedTask = value; OnPropertyChanged(); } }
         private ObservableCollection<Task> _tasks;
-        public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value; OnPropertyChanged(); } }
+        public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value; } }
+        private ObservableCollection<Task> _doneTasks;
+        public ObservableCollection<Task> DoneTasks { get => _doneTasks; set { _doneTasks = value;} }
         public BucketViewModel(Bucket bucket)
         {
             _bucket = bucket;
             _tasks = bucket.Tasks;
+            _doneTasks = bucket.DoneTasks;
             Tasks.CollectionChanged += this.OnCollectionChanged;
             foreach(Task t in Tasks)
             {
@@ -85,8 +88,10 @@ namespace WpfPractice.src.ViewModel
 
         public void DeleteTaskEventHandler(object parameter)
         {
-            Tasks.Remove(SelectedTask);
-            OnPropertyChanged();
+            if (!Tasks.Remove(SelectedTask)) {
+                DoneTasks.Remove(SelectedTask);
+            }
+            
         }
 
     }

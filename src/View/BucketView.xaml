@@ -32,11 +32,12 @@
                             Style="{DynamicResource MaterialDesignRaisedAccentButton}">Delete task</Button>
                 </StackPanel>
                 <ScrollViewer>
-                <ListBox ItemsSource="{Binding Tasks}"
+            <StackPanel>
+            <ListBox ItemsSource="{Binding Tasks}"
                          SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
                          Name="ListBox1"
                          Margin="0 20" 
-                         Height="450">
+                         Height="250">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
@@ -59,11 +60,48 @@
                                              Margin="10 0 0 0" />
                                     <TextBox IsEnabled="False"
                                              Text="{Binding DoneSubtaskList.Count , Mode=OneWay}" />
-                                </StackPanel>
+                                    <TextBox IsEnabled="False"
+                                                Text="Employee: "
+                                                Margin="10 0 0 0" />
+                                    <TextBox IsEnabled="False"
+                                                Text="{Binding Employee.Name , Mode=OneWay}" />
+                                    </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                </ScrollViewer>
+                        <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
+                                   Margin="0 20 0 0">Done tasks</TextBlock>
+                        <ListBox ItemsSource="{Binding DoneTasks}"
+                                 Margin="0 20"
+                                 Height="250">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Stretch">
+                                        <!-- As MovieList is out Itemsource, we can bind to the objects in that list (Movie) and their properties. -->
+                                        <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenTaskViewCommand}"
+                                                CommandParameter="{Binding .}"
+                                                Margin="10 0 0 0"
+                                                Style="{DynamicResource MaterialDesignRaisedAccentButton}">Expand</Button>
+                                        <TextBox Text="{Binding Name}"
+                                                 Margin="10 0 0 0"
+                                                 MinWidth="200" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="Subtask count: "
+                                                 Margin="10 0 0 0" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="{Binding DoneSubtaskList.Count , Mode=OneWay}" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="Employee: "
+                                                 Margin="10 0 0 0" />
+                                        <TextBox IsEnabled="False"
+                                                 Text="{Binding Employee.Name , Mode=OneWay}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+            </ScrollViewer>
             </StackPanel>
         </materialDesign:Card>
     </StackPanel>

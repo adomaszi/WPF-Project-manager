@@ -51,10 +51,13 @@ namespace WpfPractice.src.ViewModel
             _subtasks = _task.SubtaskList;
             _doneSubtasks = _task.DoneSubtaskList;
 
-            AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
-            DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
             _doneCommand = new TaskEventHandlerCommand(this);
             _notDoneCommand = new TaskEventHandlerCommand(this);
+            _addSubtaskCommand = new TaskEventHandlerCommand(this);
+            _deleteSubtaskCommand = new TaskEventHandlerCommand(this);
+            AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
+            DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
+            
             DoneCommand.EventHandler += DoneEventHandler;
           
             NotDoneCommand.EventHandler += NotDoneEventHandler;
@@ -65,10 +68,16 @@ namespace WpfPractice.src.ViewModel
             Employees = StorageClass.Employees;
             _task = task;
             _subtasks = _task.SubtaskList;
-            _doneSubtasks = _task.DoneSubtaskList;
-
+            _doneCommand = new TaskEventHandlerCommand(this);
+            _notDoneCommand = new TaskEventHandlerCommand(this);
+            _addSubtaskCommand = new TaskEventHandlerCommand(this);
+            _deleteSubtaskCommand = new TaskEventHandlerCommand(this);
             AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
             DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
+
+            DoneCommand.EventHandler += DoneEventHandler;
+
+            NotDoneCommand.EventHandler += NotDoneEventHandler;
         }
 
 
@@ -140,21 +149,42 @@ namespace WpfPractice.src.ViewModel
         // *****************************************************************************
         // Commands
         // *****************************************************************************
-        private EventHandlerCommand _addSubtaskCommand = new EventHandlerCommand();
-        public EventHandlerCommand AddSubtaskCommand
+        private TaskEventHandlerCommand _addSubtaskCommand;
+        public TaskEventHandlerCommand AddSubtaskCommand
         {
             get { return _addSubtaskCommand; }
         }
         public void AddSubtaskEventHandler(object parameter)
         {
-            Subtask subtask = new Subtask();
-            Subtasks.Add(subtask);
-
+            if (_bucket != null)
+            {
+                Subtask subtask = new Subtask();
+                _subtasks.Add(subtask);
+                if (_bucket.DoneTasks.Remove(_task))
+                {
+                    _bucket.Tasks.Add(_task);
+                }
+            }
         }
-        private EventHandlerCommand _deleteTaskCommand = new EventHandlerCommand();
-        public EventHandlerCommand DeleteSubtaskCommand
+
+       
+        private TaskEventHandlerCommand _deleteSubtaskCommand = new TaskEventHandlerCommand();
+        public TaskEventHandlerCommand DeleteSubtaskCommand
         {
-            get { return _deleteTaskCommand; }
+            get { return _deleteSubtaskCommand; }
+        }
+
+        public void DeleteSubtaskEventHandler(object parameter)
+        {
+            if (_bucket != null)
+            {
+                Subtasks.Remove(SelectedSubtask);
+                if (_task.SubtaskList.Count == 0 && _bucket.Tasks.Remove(_task))
+                {
+                    _bucket.DoneTasks.Add(_task);
+                }
+            }
+
         }
 
         private TaskEventHandlerCommand _doneCommand;
@@ -179,16 +209,12 @@ namespace WpfPractice.src.ViewModel
                 _selectedEmployee = value; 
                 _task.Employee = value;
                 _task.Employee.Tasks.Add(_task);
-
                 OnPropertyChanged(); 
             } }
 
         public Bucket Bucket { get => _bucket; set => _bucket = value; }
 
-        public void DeleteSubtaskEventHandler(object parameter)
-        {
-            Subtasks.Remove(SelectedSubtask);
-        }
+        
 
         public void DoneEventHandler(object parameter)
         {
