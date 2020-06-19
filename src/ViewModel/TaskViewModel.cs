@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using WpfPractice.src.Model;
 using WpfPractice.src.Storage;
 
@@ -20,12 +17,12 @@ namespace WpfPractice.src.ViewModel
         ObservableCollection<Subtask> _subtasks;
         ObservableCollection<Subtask> _doneSubtasks;
 
-    
+
 
         public string CanClickCompleteSubtasks
         {
             get { return _bucket == null ? "False" : "True"; }
-            set {}
+            set { }
         }
 
 
@@ -57,9 +54,9 @@ namespace WpfPractice.src.ViewModel
             _deleteSubtaskCommand = new TaskEventHandlerCommand(this);
             AddSubtaskCommand.EventHandler += AddSubtaskEventHandler;
             DeleteSubtaskCommand.EventHandler += DeleteSubtaskEventHandler;
-            
+
             DoneCommand.EventHandler += DoneEventHandler;
-          
+
             NotDoneCommand.EventHandler += NotDoneEventHandler;
         }
 
@@ -95,13 +92,18 @@ namespace WpfPractice.src.ViewModel
             }
         }
 
-        public DateTime DueDate { get => _task.DueDate; 
-            set {
+        public DateTime DueDate
+        {
+            get => _task.DueDate;
+            set
+            {
                 _task.DueDate = value;
                 OnPropertyChanged();
             }
         }
-        public Employee Employee { get => _task.Employee;
+        public Employee Employee
+        {
+            get => _task.Employee;
             set
             {
                 _task.Employee = value;
@@ -127,7 +129,7 @@ namespace WpfPractice.src.ViewModel
             }
         }
 
-        
+
 
         // *****************************************************************************
         // BINDING UPDATES
@@ -167,7 +169,7 @@ namespace WpfPractice.src.ViewModel
             }
         }
 
-       
+
         private TaskEventHandlerCommand _deleteSubtaskCommand = new TaskEventHandlerCommand();
         public TaskEventHandlerCommand DeleteSubtaskCommand
         {
@@ -200,26 +202,34 @@ namespace WpfPractice.src.ViewModel
         }
 
         public ObservableCollection<Employee> Employees { get => _employees; set => _employees = value; }
-        public Employee SelectedEmployee { get => _task.Employee; set {
+        public Employee SelectedEmployee
+        {
+            get => _task.Employee; set
+            {
                 Employee e = _task.Employee;
                 if (e != null)
                 {
                     e.Tasks.Remove(_task);
                 }
-                _selectedEmployee = value; 
+                _selectedEmployee = value;
                 _task.Employee = value;
-                _task.Employee.Tasks.Add(_task);
-                OnPropertyChanged(); 
-            } }
+                if (_task.Employee != null)
+                {
+                    _task.Employee.Tasks.Add(_task);
+                }
+
+                OnPropertyChanged();
+            }
+        }
 
         public Bucket Bucket { get => _bucket; set => _bucket = value; }
 
-        
+
 
         public void DoneEventHandler(object parameter)
         {
             Subtask subtask = parameter as Subtask;
-                
+
             Subtasks.Remove(subtask);
             DoneSubtasks.Add(subtask);
             if (Bucket != null)
@@ -232,7 +242,7 @@ namespace WpfPractice.src.ViewModel
                     }
                 }
             }
-            
+
         }
 
         public void NotDoneEventHandler(object parameter)
@@ -243,13 +253,13 @@ namespace WpfPractice.src.ViewModel
 
                 DoneSubtasks.Remove(subtask);
                 Subtasks.Add(subtask);
-            
-                     if (Bucket.DoneTasks.Remove(_task))
-                     {
-                        Bucket.Tasks.Add(_task);
-                     }
+
+                if (Bucket.DoneTasks.Remove(_task))
+                {
+                    Bucket.Tasks.Add(_task);
                 }
             }
-           
+        }
+
     }
 }

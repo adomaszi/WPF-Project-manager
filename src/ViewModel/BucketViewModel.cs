@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Timers;
 using WpfPractice.src.Model;
 using WpfPractice.src.View;
 
@@ -22,17 +18,17 @@ namespace WpfPractice.src.ViewModel
         private ObservableCollection<Task> _tasks;
         public ObservableCollection<Task> Tasks { get => _tasks; set { _tasks = value; } }
         private ObservableCollection<Task> _doneTasks;
-        public ObservableCollection<Task> DoneTasks { get => _doneTasks; set { _doneTasks = value;} }
+        public ObservableCollection<Task> DoneTasks { get => _doneTasks; set { _doneTasks = value; } }
         public BucketViewModel(Bucket bucket)
         {
             _bucket = bucket;
             _tasks = bucket.Tasks;
             _doneTasks = bucket.DoneTasks;
             Tasks.CollectionChanged += this.OnCollectionChanged;
-            foreach(Task t in Tasks)
+            foreach (Task t in Tasks)
             {
 
-                t.SubtaskList.CollectionChanged += this.OnCollectionChanged; 
+                t.SubtaskList.CollectionChanged += this.OnCollectionChanged;
 
             }
             OpenTaskViewCommand.EventHandler += OpenTaskViewEventHandler;
@@ -88,10 +84,11 @@ namespace WpfPractice.src.ViewModel
 
         public void DeleteTaskEventHandler(object parameter)
         {
-            if (!Tasks.Remove(SelectedTask)) {
+            if (!Tasks.Remove(SelectedTask))
+            {
                 DoneTasks.Remove(SelectedTask);
             }
-            
+
         }
 
     }

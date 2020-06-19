@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using WpfPractice.src.Model;
-using WpfPractice.src.View;
 
 namespace WpfPractice.src.ViewModel
 {
     class ProjectStatsViewModel
     {
         Project _project;
-       
+
         ObservableCollection<Task> _unassignedTasks = new ObservableCollection<Task>();
         ObservableCollection<Task> _inProgressTasks = new ObservableCollection<Task>();
         ObservableCollection<Task> _finishedTasks = new ObservableCollection<Task>();
@@ -22,7 +15,7 @@ namespace WpfPractice.src.ViewModel
         {
             _project = project;
 
-            foreach(Bucket bucket in _project.Buckets)
+            foreach (Bucket bucket in _project.Buckets)
             {
                 foreach (Task task in bucket.Tasks)
                 {

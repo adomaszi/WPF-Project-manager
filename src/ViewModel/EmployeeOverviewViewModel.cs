@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
 using WpfPractice.src.Model;
 using WpfPractice.src.Storage;
 using WpfPractice.src.View;
@@ -46,7 +42,7 @@ namespace WpfPractice.src.ViewModel
             TaskView taskView = new TaskView(new TaskViewModel(task));
             taskView.Show();
         }
-       
+
 
         public EventHandlerCommand _addEmployeeCommand = new EventHandlerCommand();
         public EventHandlerCommand AddEmployeeCommand
@@ -57,7 +53,7 @@ namespace WpfPractice.src.ViewModel
         {
             _employees.Add(new Employee());
         }
-        
+
         public EventHandlerCommand _deleteEmployeeCommand = new EventHandlerCommand();
         public EventHandlerCommand DeleteEmployeeCommand
         {

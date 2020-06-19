@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using WpfPractice.src.Model;
-using WpfPractice.src.View;
-using System.Collections.ObjectModel;
-using System.Collections;
 
 namespace WpfPractice.src.ViewModel
 {
@@ -12,7 +7,7 @@ namespace WpfPractice.src.ViewModel
     {
         ObservableCollection<Employee> _employees;
         ObservableCollection<EmployeeStats> _stats = new ObservableCollection<EmployeeStats>();
-        
+
 
         public EmployeeStatsViewModel(ObservableCollection<Employee> employees)
         {
@@ -38,7 +33,7 @@ namespace WpfPractice.src.ViewModel
 
                 _stats.Add(stats);
             }
-            
+
         }
 
         public ObservableCollection<EmployeeStats> Stats { get => _stats; set => _stats = value; }

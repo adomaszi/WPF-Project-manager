@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace WpfPractice.src.Model
 {
@@ -29,11 +26,13 @@ namespace WpfPractice.src.Model
         public String Description { get => _description; set => _description = value; }
         public DateTime DueDate { get => _dueDate; set => _dueDate = value; }
 
-        public ObservableCollection<Subtask> SubtaskList { 
-            get => _subtaskList; 
-            set {
-                _subtaskList = value; 
-            } 
+        public ObservableCollection<Subtask> SubtaskList
+        {
+            get => _subtaskList;
+            set
+            {
+                _subtaskList = value;
+            }
         }
 
         public ObservableCollection<Subtask> DoneSubtaskList
